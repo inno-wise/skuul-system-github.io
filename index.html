@@ -23,7 +23,7 @@
 
         /* Custom background image */
         .background {
-            background-image: url('https://images.unsplash.com/photo-1517503733723-8ea1cf616798?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); /* Replace with your background image */
+            background-image: url('https://example.com/your-background-image.jpg'); /* Replace with your background image */
             background-size: cover;
             background-position: center;
             position: absolute;
@@ -50,13 +50,15 @@
             font-size: 1.2rem;
             border-radius: 9999px;
             font-weight: 600;
-            transition: background-color 0.3s, transform 0.3s;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s ease-in-out;
             text-decoration: none;
         }
 
+        /* Enhanced Hover Effect for Buttons */
         .btn:hover {
             background-color: #e8a700;
-            transform: scale(1.05);
+            transform: scale(1.1);
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
         }
 
         /* Marquee effect for buttons */
@@ -136,6 +138,19 @@
                 transform: translate(var(--move-x), var(--move-y)) scale(0);
             }
         }
+
+        /* Scroll Fade-in Effect */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
     </style>
 </head>
 
@@ -145,21 +160,21 @@
     <div class="background"></div>
 
     <!-- Hero Section -->
-    <section class="text-center py-32 relative z-10 section">
+    <section class="text-center py-32 relative z-10 section fade-in" id="hero">
         <h1 class="text-5xl font-bold text-white mb-4">Welcome to iseecod3s</h1>
         <p class="text-lg text-white mb-8">A school system software developed by a self-taught DevOps engineer, cybersecurity analyst, and pitbull lover.</p>
         <a href="#shop" class="btn btn-marquee" data-text="Explore Our Software">Explore Our Software</a>
     </section>
 
     <!-- About Me Section -->
-    <section class="section text-center" id="about">
+    <section class="section text-center fade-in" id="about">
         <h2 class="text-4xl font-semibold text-white mb-6">About Me</h2>
         <p class="text-lg text-white mb-8">I'm a passionate self-taught DevOps engineer and cybersecurity analyst. With a love for technology and an ever-growing thirst for knowledge, I specialize in building secure, scalable, and efficient systems. In addition to technology, I am a proud lover and seller of pitbull dogs, striving to provide healthy and well-trained pets to loving homes.</p>
         <a href="#shop" class="btn btn-marquee" data-text="Learn More">Learn More</a>
     </section>
 
     <!-- Features Section -->
-    <section class="section text-center" id="features">
+    <section class="section text-center fade-in" id="features">
         <h2 class="text-4xl font-semibold text-white mb-12">Key Features of EduSystem</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
             <div class="p-6 bg-gray-800 shadow-lg rounded-lg hover:shadow-xl transition-all">
@@ -178,7 +193,7 @@
     </section>
 
     <!-- Shop Section -->
-    <section class="section text-center" id="shop">
+    <section class="section text-center fade-in" id="shop">
         <h2 class="text-4xl font-semibold text-white mb-6">Our Software Packages</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12">
             <div class="bg-gray-800 p-6 shadow-lg rounded-lg hover:shadow-xl transition-all">
@@ -204,9 +219,32 @@
         <p>&copy; 2024 iseecod3s. Developed by Innocent Mwea.</p>
     </footer>
 
-    <!-- JavaScript for Mouse Scroll Effect and Particle Interaction -->
+    <!-- JavaScript for Scroll Effects, Hover Effects, and Right-Click Disable -->
     <script>
-        // Particle effect based on mouse movement
+        // Disable Right Click
+        document.addEventListener('contextmenu', (e) => e.preventDefault());
+
+        // Scroll fade-in effect
+        const fadeInElements = document.querySelectorAll('.fade-in');
+        const fadeInOnScroll = () => {
+            fadeInElements.forEach((el) => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top <= window.innerHeight * 0.8) {
+                    el.classList.add('visible');
+                }
+            });
+        };
+        window.addEventListener('scroll', fadeInOnScroll);
+
+        // Mouse Scroll Effects
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.scrollY;
+            const backgroundImage = document.querySelector('.background');
+            const scrollSpeed = 0.5;
+            backgroundImage.style.transform = `translateY(${scrollPosition * scrollSpeed}px)`;
+        });
+
+        // Particles Effect
         document.addEventListener('mousemove', (e) => {
             const particlesContainer = document.body;
             const particle = document.createElement('div');
@@ -229,16 +267,6 @@
             setTimeout(() => {
                 particle.remove();
             }, 2000);
-        });
-
-        // Scroll effect
-        window.addEventListener('scroll', () => {
-            const scrollPosition = window.scrollY;
-            const backgroundImage = document.querySelector('.background');
-            const scrollSpeed = 0.5;
-
-            // Scroll background effect
-            backgroundImage.style.transform = `translateY(${scrollPosition * scrollSpeed}px)`;
         });
     </script>
 </body>
