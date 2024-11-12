@@ -5,27 +5,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>iseecod3s - School System Software</title>
+
+    <!-- Google Fonts for a modern look -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+
     <style>
-        /* Background video */
-        .video-background {
+        /* Global Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* Custom background image */
+        .background {
+            background-image: url('https://example.com/your-background-image.jpg'); /* Replace with your background image */
+            background-size: cover;
+            background-position: center;
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
             z-index: -1;
+            opacity: 0.7;
         }
 
-        /* Custom text box with transparent background for readability */
+        /* Custom Section Styling */
         .section {
-            padding: 100px 20px;
-            background-color: rgba(0, 0, 0, 0.6);
+            padding: 80px 20px;
+            background-color: rgba(0, 0, 0, 0.5);
             border-radius: 10px;
         }
 
-        /* Marquee effect on hover for buttons */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: #f9c74f;
+            color: #333;
+            font-size: 1.2rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.3s;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background-color: #e8a700;
+            transform: scale(1.05);
+        }
+
+        /* Marquee effect for buttons */
         .btn-marquee {
             position: relative;
             overflow: hidden;
@@ -57,63 +91,76 @@
             }
         }
 
-        .btn {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            background-color: #f9c74f;
-            color: #333;
-            font-size: 1.25rem;
-            border-radius: 9999px;
-            transition: background-color 0.3s, transform 0.3s;
-            position: relative;
+        /* Modern Typography */
+        h1, h2, h3 {
+            font-weight: 600;
         }
 
-        .btn:hover {
-            background-color: #e8a700;
-            transform: scale(1.05);
+        p {
+            font-weight: 300;
+            font-size: 1.1rem;
+            line-height: 1.8;
         }
 
-        /* Ensure the site is fully responsive */
+        /* Grid styling for responsive design */
         @media (max-width: 768px) {
             .section {
-                padding: 50px 20px;
+                padding: 60px 20px;
             }
 
             .btn {
                 font-size: 1rem;
+                padding: 0.75rem 1.5rem;
             }
 
-            .text-center {
-                text-align: center;
+            .grid-cols-3 {
+                grid-template-columns: repeat(1, 1fr);
+            }
+        }
+
+        /* Particle Animation */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.7);
+            pointer-events: none;
+            animation: particle-move 2s ease-out forwards;
+        }
+
+        @keyframes particle-move {
+            0% {
+                transform: translate(0, 0) scale(0.5);
+            }
+
+            100% {
+                transform: translate(var(--move-x), var(--move-y)) scale(0);
             }
         }
     </style>
 </head>
 
-<body class="bg-gray-900 text-white">
+<body>
 
-    <!-- Background Video -->
-    <video autoplay loop muted class="video-background">
-        <source src="https://youtu.be/mOFoh9FUR8w?si=IoSlGKh0-0qfjn-2">
-    </video>
+    <!-- Background Image -->
+    <div class="background"></div>
 
     <!-- Hero Section -->
     <section class="text-center py-32 relative z-10 section">
-        <h1 class="text-5xl font-bold mb-4">Welcome to iseecod3s</h1>
-        <p class="text-lg mb-8">A school system software developed by a self-taught DevOps engineer, cybersecurity analyst, and pitbull lover.</p>
+        <h1 class="text-5xl font-bold text-white mb-4">Welcome to iseecod3s</h1>
+        <p class="text-lg text-white mb-8">A school system software developed by a self-taught DevOps engineer, cybersecurity analyst, and pitbull lover.</p>
         <a href="#shop" class="btn btn-marquee" data-text="Explore Our Software">Explore Our Software</a>
     </section>
 
-    <!-- About Section -->
+    <!-- About Me Section -->
     <section class="section text-center" id="about">
-        <h2 class="text-4xl font-bold mb-6">About Me</h2>
-        <p class="text-lg mb-8">I'm a passionate self-taught DevOps engineer and cybersecurity analyst. With a love for technology and an ever-growing thirst for knowledge, I specialize in building secure, scalable, and efficient systems. In addition to technology, I am a proud lover and seller of pitbull dogs, striving to provide healthy and well-trained pets to loving homes.</p>
+        <h2 class="text-4xl font-semibold text-white mb-6">About Me</h2>
+        <p class="text-lg text-white mb-8">I'm a passionate self-taught DevOps engineer and cybersecurity analyst. With a love for technology and an ever-growing thirst for knowledge, I specialize in building secure, scalable, and efficient systems. In addition to technology, I am a proud lover and seller of pitbull dogs, striving to provide healthy and well-trained pets to loving homes.</p>
         <a href="#shop" class="btn btn-marquee" data-text="Learn More">Learn More</a>
     </section>
 
     <!-- Features Section -->
     <section class="section text-center" id="features">
-        <h2 class="text-4xl font-bold mb-12">Key Features of EduSystem</h2>
+        <h2 class="text-4xl font-semibold text-white mb-12">Key Features of EduSystem</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
             <div class="p-6 bg-gray-800 shadow-lg rounded-lg hover:shadow-xl transition-all">
                 <h3 class="text-xl font-semibold text-white mb-4">Attendance Management</h3>
@@ -132,7 +179,7 @@
 
     <!-- Shop Section -->
     <section class="section text-center" id="shop">
-        <h2 class="text-4xl font-bold mb-6">Our Software Packages</h2>
+        <h2 class="text-4xl font-semibold text-white mb-6">Our Software Packages</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12">
             <div class="bg-gray-800 p-6 shadow-lg rounded-lg hover:shadow-xl transition-all">
                 <h3 class="text-2xl font-semibold text-white mb-4">EduSystem Basic</h3>
@@ -157,80 +204,43 @@
         <p>&copy; 2024 iseecod3s. Developed by Innocent Mwea.</p>
     </footer>
 
-    <!-- Scroll Effect & Canvas Animation -->
+    <!-- JavaScript for Mouse Scroll Effect and Particle Interaction -->
     <script>
-        // Initialize canvas background animation (if needed)
-        const canvas = document.getElementById('bgCanvas');
-        const ctx = canvas.getContext('2d');
-        
-        // Resize canvas to fill the screen
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        // Particle effect based on mouse movement
+        document.addEventListener('mousemove', (e) => {
+            const particlesContainer = document.body;
+            const particle = document.createElement('div');
+            const size = Math.random() * 8 + 3;
+            particle.classList.add('particle');
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.top = `${e.clientY - size / 2}px`;
+            particle.style.left = `${e.clientX - size / 2}px`;
 
-        // Variables for the canvas animation
-        let particles = [];
-        let particleCount = 100;
+            // Adding animation to particles
+            const moveX = Math.random() * 100 - 50;
+            const moveY = Math.random() * 100 - 50;
+            particle.style.setProperty('--move-x', `${moveX}px`);
+            particle.style.setProperty('--move-y', `${moveY}px`);
+            
+            particlesContainer.appendChild(particle);
 
-        function Particle(x, y) {
-            this.x = x;
-            this.y = y;
-            this.size = Math.random() * 3 + 1;
-            this.speedX = Math.random() * 0.5 - 0.25;
-            this.speedY = Math.random() * 0.5 - 0.25;
-        }
-
-        Particle.prototype.update = function() {
-            this.x += this.speedX;
-            this.y += this.speedY;
-            if (this.size > 0.2) this.size -= 0.1;
-        }
-
-        Particle.prototype.draw = function() {
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
-            ctx.strokeStyle = 'rgba(255, 255, 255, 0.7)';
-            ctx.lineWidth = 1;
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.closePath();
-            ctx.fill();
-        }
-
-        function createParticles(e) {
-            let xPos = e.x;
-            let yPos = e.y;
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle(xPos, yPos));
-            }
-        }
-
-        function animateCanvas() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].update();
-                particles[i].draw();
-                if (particles[i].size <= 0.2) {
-                    particles.splice(i, 1);
-                    i--;
-                }
-            }
-            requestAnimationFrame(animateCanvas);
-        }
-
-        // Event listeners for mousemove and scroll
-        window.addEventListener('mousemove', createParticles);
-        window.addEventListener('scroll', function() {
-            if (window.scrollY > 100) {
-                document.body.style.transition = 'background-color 0.3s ease-in-out';
-                document.body.style.backgroundColor = '#181818'; // Darken background after scroll
-            } else {
-                document.body.style.backgroundColor = '#1f1f1f'; // Reset to default dark color
-            }
+            // Remove particle after animation
+            setTimeout(() => {
+                particle.remove();
+            }, 2000);
         });
 
-        // Start animation
-        animateCanvas();
-    </script>
+        // Scroll effect
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.scrollY;
+            const backgroundImage = document.querySelector('.background');
+            const scrollSpeed = 0.5;
 
+            // Scroll background effect
+            backgroundImage.style.transform = `translateY(${scrollPosition * scrollSpeed}px)`;
+        });
+    </script>
 </body>
 
 </html>
