@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISeeCod3s - Software Shop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles */
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .canvas-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .section {
+            padding: 100px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Canvas Background -->
+    <canvas id="bgCanvas" class="canvas-bg"></canvas>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-blue-500 to-purple-600 text-white text-center py-32 relative z-10">
+        <h1 class="text-5xl font-bold mb-4">Welcome to ISeeCod3s</h1>
+        <p class="text-lg mb-8">Your one-stop software shop for innovative tools and solutions.</p>
+        <a href="#shop" class="bg-yellow-500 hover:bg-yellow-400 text-gray-800 px-6 py-3 rounded-full text-xl transition-all">Explore Our Products</a>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section bg-white text-center" id="features">
+        <h2 class="text-4xl font-bold text-gray-900 mb-12">Why Choose Us?</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
+            <div class="p-6 bg-gray-50 shadow-lg rounded-lg hover:shadow-xl transition-all">
+                <h3 class="text-xl font-semibold text-gray-900 mb-4">Innovative Solutions</h3>
+                <p>We provide cutting-edge software tailored to your business needs.</p>
+            </div>
+            <div class="p-6 bg-gray-50 shadow-lg rounded-lg hover:shadow-xl transition-all">
+                <h3 class="text-xl font-semibold text-gray-900 mb-4">Affordable Pricing</h3>
+                <p>High-quality software at competitive prices, without breaking the bank.</p>
+            </div>
+            <div class="p-6 bg-gray-50 shadow-lg rounded-lg hover:shadow-xl transition-all">
+                <h3 class="text-xl font-semibold text-gray-900 mb-4">24/7 Support</h3>
+                <p>Our support team is always here to help you with any queries or issues.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shop Section -->
+    <section class="section bg-gradient-to-r from-green-500 to-teal-500 text-white text-center" id="shop">
+        <h2 class="text-4xl font-bold mb-6">Browse Our Products</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12">
+            <div class="bg-white p-6 shadow-lg rounded-lg hover:shadow-xl transition-all">
+                <h3 class="text-2xl font-semibold text-gray-900 mb-4">Product 1</h3>
+                <p class="text-gray-700 mb-4">High-quality software for productivity enhancement.</p>
+                <a href="#" class="bg-yellow-500 hover:bg-yellow-400 text-gray-800 px-6 py-3 rounded-full transition-all">Buy Now</a>
+            </div>
+            <div class="bg-white p-6 shadow-lg rounded-lg hover:shadow-xl transition-all">
+                <h3 class="text-2xl font-semibold text-gray-900 mb-4">Product 2</h3>
+                <p class="text-gray-700 mb-4">Next-gen software for streamlining workflows.</p>
+                <a href="#" class="bg-yellow-500 hover:bg-yellow-400 text-gray-800 px-6 py-3 rounded-full transition-all">Buy Now</a>
+            </div>
+            <div class="bg-white p-6 shadow-lg rounded-lg hover:shadow-xl transition-all">
+                <h3 class="text-2xl font-semibold text-gray-900 mb-4">Product 3</h3>
+                <p class="text-gray-700 mb-4">Powerful tools for developers and businesses.</p>
+                <a href="#" class="bg-yellow-500 hover:bg-yellow-400 text-gray-800 px-6 py-3 rounded-full transition-all">Buy Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-800 text-white text-center py-8">
+        <p>&copy; 2024 ISeeCod3s. All rights reserved.</p>
+    </footer>
+
+    <!-- Scroll Effect & Canvas Animation -->
+    <script>
+        // Initialize canvas background animation
+        const canvas = document.getElementById('bgCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Resize canvas to fill the screen
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Variables for the canvas animation
+        let particles = [];
+        let particleCount = 100;
+
+        function Particle(x, y) {
+            this.x = x;
+            this.y = y;
+            this.size = Math.random() * 3 + 1;
+            this.speedX = Math.random() * 0.5 - 0.25;
+            this.speedY = Math.random() * 0.5 - 0.25;
+        }
+
+        Particle.prototype.update = function() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            if (this.size > 0.2) this.size -= 0.1;
+        }
+
+        Particle.prototype.draw = function() {
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.7)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        function createParticles(e) {
+            let xPos = e.x;
+            let yPos = e.y;
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle(xPos, yPos));
+            }
+        }
+
+        function animateCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+                if (particles[i].size <= 0.2) {
+                    particles.splice(i, 1);
+                    i--;
+                }
+            }
+            requestAnimationFrame(animateCanvas);
+        }
+
+        // Event listeners for mousemove and scroll
+        window.addEventListener('mousemove', createParticles);
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 100) {
+                document.body.style.transition = 'background-color 0.3s ease-in-out';
+                document.body.style.backgroundColor = '#f7fafc'; // Light background after scroll
+            } else {
+                document.body.style.backgroundColor = '#ffffff';
+            }
+        });
+
+        // Start animation
+        animateCanvas();
+    </script>
+
+</body>
+</html>
