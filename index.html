@@ -156,10 +156,55 @@
             transform: translateY(0);
         }
 
+        /* Navbar Styling */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 1rem 2rem;
+        }
+
+        .navbar a {
+            color: #f9c74f;
+            font-size: 1.1rem;
+            margin-right: 1.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .navbar a:hover {
+            color: #e8a700;
+        }
+
+        /* Social Media Links */
+        .social-icons a {
+            margin: 0 15px;
+            color: #f9c74f;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: #e8a700;
+        }
+
     </style>
 </head>
 
 <body>
+
+    <!-- Navbar Section -->
+    <nav class="navbar">
+        <a href="#hero">Home</a>
+        <a href="#about">About</a>
+        <a href="#features">Features</a>
+        <a href="#shop">Shop</a>
+        <a href="#contact">Contact</a>
+    </nav>
 
     <!-- Background Image -->
     <div class="background"></div>
@@ -216,6 +261,27 @@
                 <p class="text-gray-300 mb-4">All-in-one platform with premium support, cloud storage, and complete school management.</p>
                 <a href="#" class="btn btn-marquee" data-text="Subscribe Now">Subscribe Now</a>
             </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section text-center fade-in">
+        <h2 class="text-4xl font-semibold text-white mb-6">Contact & Connect</h2>
+        <p class="text-lg text-white mb-6">Feel free to reach out to me or follow me on my social media.</p>
+        <div class="social-icons">
+            <!-- Social Media Links -->
+            <a href="https://twitter.com" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/60/Twitter_Logo_2021.svg" alt="Twitter" class="inline-block w-8 h-8 mb-4 hover:scale-110 transition-all">
+            </a>
+            <a href="https://facebook.com" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" class="inline-block w-8 h-8 mb-4 hover:scale-110 transition-all">
+            </a>
+            <a href="https://linkedin.com" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/01/LinkedIn_Logo_2023.svg" alt="LinkedIn" class="inline-block w-8 h-8 mb-4 hover:scale-110 transition-all">
+            </a>
+            <a href="https://github.com" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a3/GitHub_Logo_2022.png" alt="GitHub" class="inline-block w-8 h-8 mb-4 hover:scale-110 transition-all">
+            </a>
         </div>
     </section>
 
