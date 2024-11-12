@@ -1,33 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduSystem - School Management Software</title>
+    <title>iseecod3s - School System Software</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Custom styles */
-        body {
-            margin: 0;
-            font-family: 'Inter', sans-serif;
-            background-color: #1f1f1f; /* Dark background like GitHub */
-            color: #eaeaea; /* Light text color for contrast */
-        }
-
-        .canvas-bg {
-            position: fixed;
+        /* Background video */
+        .video-background {
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            object-fit: cover;
             z-index: -1;
         }
 
+        /* Custom text box with transparent background for readability */
         .section {
-            padding: 100px 0;
+            padding: 100px 20px;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
         }
 
-        /* Marquee effect on hover */
+        /* Marquee effect on hover for buttons */
         .btn-marquee {
             position: relative;
             overflow: hidden;
@@ -53,6 +51,7 @@
             0% {
                 left: 100%;
             }
+
             100% {
                 left: -100%;
             }
@@ -73,23 +72,48 @@
             background-color: #e8a700;
             transform: scale(1.05);
         }
+
+        /* Ensure the site is fully responsive */
+        @media (max-width: 768px) {
+            .section {
+                padding: 50px 20px;
+            }
+
+            .btn {
+                font-size: 1rem;
+            }
+
+            .text-center {
+                text-align: center;
+            }
+        }
     </style>
 </head>
-<body>
 
-    <!-- Canvas Background -->
-    <canvas id="bgCanvas" class="canvas-bg"></canvas>
+<body class="bg-gray-900 text-white">
+
+    <!-- Background Video -->
+    <video autoplay loop muted class="video-background">
+        <source src="https://www.youtube.com/watch?v=your-video-id" type="video/mp4">
+    </video>
 
     <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-blue-900 to-indigo-800 text-white text-center py-32 relative z-10">
-        <h1 class="text-5xl font-bold mb-4">Welcome to EduSystem</h1>
-        <p class="text-lg mb-8">An intuitive school management software designed to streamline education and administration.</p>
+    <section class="text-center py-32 relative z-10 section">
+        <h1 class="text-5xl font-bold mb-4">Welcome to iseecod3s</h1>
+        <p class="text-lg mb-8">A school system software developed by a self-taught DevOps engineer, cybersecurity analyst, and pitbull lover.</p>
         <a href="#shop" class="btn btn-marquee" data-text="Explore Our Software">Explore Our Software</a>
     </section>
 
+    <!-- About Section -->
+    <section class="section text-center" id="about">
+        <h2 class="text-4xl font-bold mb-6">About Me</h2>
+        <p class="text-lg mb-8">I'm a passionate self-taught DevOps engineer and cybersecurity analyst. With a love for technology and an ever-growing thirst for knowledge, I specialize in building secure, scalable, and efficient systems. In addition to technology, I am a proud lover and seller of pitbull dogs, striving to provide healthy and well-trained pets to loving homes.</p>
+        <a href="#shop" class="btn btn-marquee" data-text="Learn More">Learn More</a>
+    </section>
+
     <!-- Features Section -->
-    <section class="section bg-gray-900 text-center" id="features">
-        <h2 class="text-4xl font-bold text-white mb-12">Key Features of EduSystem</h2>
+    <section class="section text-center" id="features">
+        <h2 class="text-4xl font-bold mb-12">Key Features of EduSystem</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
             <div class="p-6 bg-gray-800 shadow-lg rounded-lg hover:shadow-xl transition-all">
                 <h3 class="text-xl font-semibold text-white mb-4">Attendance Management</h3>
@@ -107,7 +131,7 @@
     </section>
 
     <!-- Shop Section -->
-    <section class="section bg-gradient-to-r from-blue-900 to-indigo-800 text-white text-center" id="shop">
+    <section class="section text-center" id="shop">
         <h2 class="text-4xl font-bold mb-6">Our Software Packages</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12">
             <div class="bg-gray-800 p-6 shadow-lg rounded-lg hover:shadow-xl transition-all">
@@ -130,12 +154,12 @@
 
     <!-- Footer Section -->
     <footer class="bg-gray-900 text-white text-center py-8">
-        <p>&copy; 2024 EduSystem. All rights reserved.</p>
+        <p>&copy; 2024 iseecod3s. Developed by Innocent Mwea.</p>
     </footer>
 
     <!-- Scroll Effect & Canvas Animation -->
     <script>
-        // Initialize canvas background animation
+        // Initialize canvas background animation (if needed)
         const canvas = document.getElementById('bgCanvas');
         const ctx = canvas.getContext('2d');
         
@@ -208,4 +232,5 @@
     </script>
 
 </body>
+
 </html>
