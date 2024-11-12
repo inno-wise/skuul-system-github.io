@@ -209,6 +209,9 @@
         <a href="#contact">Contact</a>
         <a href="https://inno-wise.github.io/mydiary/blogs/linux.html">Pitbul</a>
         <a href="https://inno-wise.github.io/mydiary/blogs/blackhat.html">iseebox</a>
+        <button id="downloadBtn" class="bg-gray-100 text-gray-800 border-2 border-transparent hover:bg-lime-500 hover:text-lime-500 hover:border-lime-500 py-2 px-4 rounded-lg transition-all">
+        Download
+    </button>
     </nav>
 
     <!-- Background Image -->
@@ -343,6 +346,36 @@
             setTimeout(() => {
                 particle.remove();
             }, 2000);
+        });
+    </script>
+    <script>
+        // Function to handle the download
+        document.getElementById('downloadBtn').addEventListener('click', async function () {
+            const url = 'path/to/your/file.zip'; // Path to your ZIP file
+            try {
+                const response = await fetch(url);
+                
+                // Check if the file exists (status 200)
+                if (!response.ok) {
+                    throw new Error('File not found or there was an issue fetching the file.');
+                }
+                
+                // Get the file data as a Blob
+                const blob = await response.blob();
+                
+                // Create a temporary link element to trigger the download
+                const link = document.createElement('a');
+                const urlObject = URL.createObjectURL(blob);
+                link.href = urlObject;
+                link.download = url.split('/').pop(); // Extract the file name from the URL
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(urlObject); // Clean up the object URL
+            } catch (error) {
+                // Handle errors (e.g., file not found)
+                alert(`Error downloading the file: ${error.message}`);
+            }
         });
     </script>
 
