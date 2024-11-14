@@ -6,8 +6,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-<link rel="icon" type="image/x-icon" href="https://inno-wise.github.io/mydiary/img/mot.png">
-  <title>{{ school_name | default:"iseecod3s" }}</title>
+
+  <title>{{ school_name | default:"MySchool" }}</title>
 
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
@@ -76,7 +76,7 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
-      <a href="{% url 'home' %}" class="brand-link">{{ school_name | default:"iseecod3s" }}</a>
+      <a href="{% url 'home' %}" class="brand-link">{{ school_name | default:"MySchool" }}</a>
 
       <!-- Sidebar -->
       <div class="sidebar">
