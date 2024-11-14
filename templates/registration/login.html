@@ -14,71 +14,121 @@
   <!-- Tailwind CSS (CDN) -->
   <script src="https://cdn.tailwindcss.com"></script>
   
+  <!-- rellax.js (for Parallax Effect) -->
+  <script src="https://cdn.jsdelivr.net/npm/rellax@1.12.0/rellax.min.js"></script>
+
   <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
   
   <!-- Toastr CSS -->
   <link rel="stylesheet" href="{% static 'plugins/toastr/toastr.min.css' %}">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Parallax Effect */
+    .parallax {
+      background-image: url('{% static "dist/img/login-background.jpg" %}');
+      height: 100vh;
+      background-attachment: fixed;
+      background-size: cover;
+      background-position: center;
+    }
+
+    /* Customized Colors */
+    .custom-bg {
+      background-color: #f4f7fc; /* Light gray background */
+    }
+
+    .custom-btn {
+      background-color: #4C8BF5;
+      color: white;
+    }
+
+    .custom-btn:hover {
+      background-color: #3577cc;
+    }
+
+    .custom-border {
+      border-color: #4C8BF5;
+    }
+
+    .custom-focus {
+      border-color: #4C8BF5;
+      box-shadow: 0 0 0 2px rgba(76, 139, 245, 0.4);
+    }
+
+    /* Custom font family and typography */
+    .custom-font {
+      font-family: 'Roboto', sans-serif;
+    }
+  </style>
 </head>
 
-<body class="bg-gray-100 font-sans antialiased">
+<body class="bg-gray-100 font-sans antialiased custom-font">
 
-  <div class="min-h-screen flex items-center justify-center">
-    <div class="max-w-md w-full bg-white p-8 rounded-xl shadow-lg">
-      <div class="flex justify-center mb-8">
-        <img class="w-32 h-32" src="{% static 'dist/img/login.png' %}" alt="Login Image">
-      </div>
-
-      <form method="post" action="{% url 'login' %}" class="space-y-6">
-        {% csrf_token %}
+  <!-- Parallax Background -->
+  <div class="parallax">
+    <div class="min-h-screen flex items-center justify-center py-6 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-md w-full bg-white p-8 rounded-xl shadow-lg transform transition-all duration-500 hover:scale-105 hover:shadow-2xl">
         
-        <div class="text-center text-3xl font-semibold text-gray-800">
-          {{ school_name | default:"Innocenty" }}
+        <div class="flex justify-center mb-8">
+          <img class="w-32 h-32 transform transition-transform duration-500 hover:scale-110" src="{% static 'dist/img/login.png' %}" alt="Login Image">
         </div>
 
-        {% if form.errors %}
-          <p class="text-red-500 text-center">Your username and password didn't match. Please try again.</p>
-        {% endif %}
-
-        {% if next %}
-          {% if user.is_authenticated %}
-            <p class="text-red-500 text-center"> Your account doesn't have access to this page. Please log in with an account that has access.</p>
-          {% else %}
-            <p class="text-center text-gray-600">Please Login to see this page.</p>
-          {% endif %}
-        {% endif %}
-        
-        <div>
-          <label for="username" class="block text-gray-700">Username</label>
-          <input type="text" name="username" id="id_username" class="w-full px-4 py-3 mt-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" placeholder="Username" required>
-        </div>
-
-        <div>
-          <label for="password" class="block text-gray-700">Password</label>
-          <input type="password" name="password" id="id_password" class="w-full px-4 py-3 mt-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" placeholder="Password" required>
-        </div>
-
-        <div class="flex items-center justify-between mt-4">
-          <div class="flex items-center">
-            <input type="checkbox" id="remember" class="h-4 w-4 text-blue-500 border-gray-300 rounded">
-            <label for="remember" class="ml-2 text-sm text-gray-600">Remember Me</label>
+        <!-- Login Form -->
+        <form method="post" action="{% url 'login' %}" class="space-y-6">
+          {% csrf_token %}
+          
+          <div class="text-center text-4xl font-semibold text-gray-800">
+            {{ school_name | default:"Innocenty" }}
           </div>
-          <a href="#" class="text-sm text-blue-500 hover:text-blue-700">Forgot Password?</a>
-        </div>
 
-        <div>
-          <button type="submit" class="w-full py-3 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 focus:ring-2 focus:ring-blue-500">
-            Login
-          </button>
-        </div>
+          {% if form.errors %}
+            <p class="text-red-500 text-center">Your username and password didn't match. Please try again.</p>
+          {% endif %}
 
-        <div class="text-center mt-4">
-          <span class="text-sm text-gray-600">Don't have an account?</span>
-          <a href="#" class="text-sm text-blue-500 hover:text-blue-700">Sign Up</a>
-        </div>
-        
-        <input type="hidden" name="next" value="{{ next }}">
-      </form>
+          {% if next %}
+            {% if user.is_authenticated %}
+              <p class="text-red-500 text-center">Your account doesn't have access to this page. Please log in with an account that has access.</p>
+            {% else %}
+              <p class="text-center text-gray-600">Please Login to see this page.</p>
+            {% endif %}
+          {% endif %}
+          
+          <div>
+            <label for="username" class="block text-gray-700">Username</label>
+            <input type="text" name="username" id="id_username" class="w-full px-4 py-3 mt-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 transition-all duration-300 custom-border custom-focus" placeholder="Username" required>
+          </div>
+
+          <div>
+            <label for="password" class="block text-gray-700">Password</label>
+            <input type="password" name="password" id="id_password" class="w-full px-4 py-3 mt-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 transition-all duration-300 custom-border custom-focus" placeholder="Password" required>
+          </div>
+
+          <div class="flex items-center justify-between mt-4">
+            <div class="flex items-center">
+              <input type="checkbox" id="remember" class="h-4 w-4 text-blue-500 border-gray-300 rounded transition-all duration-300">
+              <label for="remember" class="ml-2 text-sm text-gray-600">Remember Me</label>
+            </div>
+            <a href="#" class="text-sm text-blue-500 hover:text-blue-700 transition-all duration-300">Forgot Password?</a>
+          </div>
+
+          <div>
+            <button type="submit" class="w-full py-3 custom-btn font-semibold rounded-md hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 transition-all duration-300 ease-in-out transform hover:scale-105">
+              Login
+            </button>
+          </div>
+
+          <div class="text-center mt-4">
+            <span class="text-sm text-gray-600">Don't have an account?</span>
+            <a href="#" class="text-sm text-blue-500 hover:text-blue-700 transition-all duration-300">Sign Up</a>
+          </div>
+          
+          <input type="hidden" name="next" value="{{ next }}">
+        </form>
+      </div>
     </div>
   </div>
 
@@ -86,6 +136,13 @@
   <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
   <script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
   <script src="{% static 'plugins/toastr/toastr.min.js' %}"></script>
+
+  <!-- Parallax Effect Initialization -->
+  <script type="text/javascript">
+    var rellax = new Rellax('.parallax', {
+      speed: 2, // Adjust the speed of the parallax effect
+    });
+  </script>
 
   {% if messages %}
     {% for message in messages %}
