@@ -19,4 +19,3 @@ sqlparse==0.4.4
 tomli==1.0.4
 gunicorn
 psycopg2-binary
-systemutils
