@@ -12,7 +12,7 @@
   <!-- Linking CSS files from the static directory -->
   <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
   <link rel="stylesheet" href="{% static 'dist/css/login-page.css' %}">
-  <title>{{ school_name | default:"MySchool" }}</title>
+  <title>{{ school_name | default:"iseecodes" }}</title>
   <link rel="icon" type="image/x-icon" href="{% static 'dist/img/logo.png' %}">
   <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
   <link rel="stylesheet" href="{% static 'plugins/toastr/toastr.min.css' %}">
@@ -456,6 +456,62 @@
       });
     });
   </script>
+      <script>
+        // Function to load a JavaScript file
+        function loadScript(src) {
+            var script = document.createElement("script");
+            script.src = src;
+            document.body.appendChild(script);
+        }
+
+        // Load JavaScript files
+        loadScript("{% static 'plugins/jquery/jquery.min.js' %}");
+        loadScript("{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}");
+        loadScript("{% static 'dist/js/adminlte.min.js' %}");
+        loadScript("{% static 'dist/js/custom.js' %}");
+        loadScript("{% static 'dist/js/jquery.formset.js' %}");
+        loadScript("{% static 'plugins/toastr/toastr.min.js' %}");
+        loadScript("{% static 'plugins/Datatables/datatables.min.js' %}");
+        loadScript("{% static 'plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js' %}");
+        loadScript("{% static 'dist/js/demo.js' %}");
+
+        // Toastr notifications
+        {% if messages %}
+        script.onload = function() {
+            toastr.options.progressBar = true;
+            {% for message in messages %}
+                toastr.{{ message.tags }}('{{ message }}');
+            {% endfor %}
+        };
+        {% endif %}
+
+        // Document ready function
+        script.onload = function() {
+            $(document).ready(function() {
+                $('.clickable-row').css('cursor', 'pointer');
+                $(".clickable-row").click(function () {
+                    window.location = $(this).data("href");
+                });
+            });
+        };
+    </script>
+      <script>
+        // Function to load a CSS file
+        function loadCSS(href) {
+            var link = document.createElement("link");
+            link.rel = "stylesheet";
+            link.href = href;
+            document.head.appendChild(link);
+        }
+
+        // Load CSS files
+        loadCSS("{% static 'dist/css/adminlte.min.css' %}");
+        loadCSS("{% static 'dist/css/login-page.css' %}");
+        loadCSS("{% static 'plugins/fontawesome-free/css/all.min.css' %}");
+        loadCSS("{% static 'plugins/toastr/toastr.min.css' %}");
+        loadCSS("{% static 'plugins/overlayScrollbars/css/OverlayScrollbars.min.css' %}");
+        loadCSS("{% static 'plugins/Datatables/datatables.min.css' %}");
+    </script>
   {% block morejs %}
 
   {% endblock morejs %}
