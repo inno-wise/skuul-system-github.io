@@ -133,22 +133,22 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Caching settings
 # Optional: Redis caching for production
 if not DEBUG:
-# Caching settings
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        'LOCATION': 'unique-snowflake',
-    },
-    'redis': {
-        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-        'LOCATION': os.getenv('REDIS_URL', 'redis://localhost:6379'),
-        'OPTIONS': {
-            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+           'LOCATION': 'unique-snowflake',
+            },
+        'redis': {
+            'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+            'LOCATION': os.getenv('REDIS_URL', 'redis://localhost:6379'),
+            'OPTIONS': {
+                'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+                }
+            }
         }
-    }
-}
 
 
 # Internationalization settings
