@@ -32,7 +32,7 @@
   <style>
     /* Parallax Effect */
     .parallax {
-      background-image: url('{% static "images/empty-classroom.webp" %}');
+      background-image: url('href="https://inno-wise.github.io/mydiary/img/mot.png"');
       height: 100vh;
       background-attachment: fixed;
       background-size: cover;
@@ -78,7 +78,7 @@
         
         <div class="flex justify-center mb-8">
           <!-- Updated Image Path for login.png -->
-          <img class="w-32 h-32 transform transition-transform duration-500 hover:scale-110" src="{% static 'dist/img/login.png' %}" alt="Login Image">
+          <img class="w-32 h-32 transform transition-transform duration-500 hover:scale-110" src="href="https://inno-wise.github.io/mydiary/img/mot.png"" alt="Login Image">
         </div>
         <!-- Add content here -->
      
@@ -142,6 +142,14 @@
   </div>
 
   <!-- REQUIRED SCRIPTS -->
+script src="{% static 'dist/js/jquery.min.js' %}"></script>
+  <script src="{% static 'dist/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'dist/js/adminlte.min.js' %}"></script>
+
+  <!-- Toastr for notifications -->
+  <script src="{% static 'plugins/toastr/toastr.min.js' %}"></script>
+
+
   <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
   <script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
   <script src="{% static 'plugins/toastr/toastr.min.js' %}"></script>
