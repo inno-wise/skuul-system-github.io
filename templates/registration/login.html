@@ -160,7 +160,49 @@ script src="{% static 'dist/js/jquery.min.js' %}"></script>
       speed: 2, // Adjust the speed of the parallax effect
     });
   </script>
+ <script>
+        // Optional: Add onload handlers if you need to do something after scripts load
+        var tailwindScript = loadScript("https://cdn.tailwindcss.com", true);
+        tailwindScript.onload = function() {
+            console.log("Tailwind CSS loaded");
+        };
 
+        var rellaxScript = loadScript("https://cdn.jsdelivr.net/npm/rellax@1.12.0/rellax.min.js", true);
+        rellaxScript.onload = function() {
+            // Initialize Rellax if needed
+            var rellax = new Rellax('.rellax');
+        };
+    </script>
+      <script>
+        // Optional: Initialize libraries after they load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Toastr configuration
+            if (window.toastr) {
+                toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+            }
+        });
+    </script>
+
+    <!-- Fallback for browsers with JavaScript disabled -->
+    <noscript>
+        <p>This website requires JavaScript to function properly.</p>
+    </noscript>
   {% if messages %}
     {% for message in messages %}
       <script type="text/javascript">
