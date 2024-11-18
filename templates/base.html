@@ -19,6 +19,133 @@
   <link rel="stylesheet" href="{% static 'plugins/overlayScrollbars/css/OverlayScrollbars.min.css' %}">
   <link rel="stylesheet" href="{% static 'plugins/Datatables/datatables.min.css' %}">
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <style>
+    /* General Styles */
+    body {
+        font-family: 'Source Sans Pro', sans-serif;
+        line-height: 1.6;
+        background-color: #f4f6f9; /* Light background for better contrast */
+        color: #343a40; /* Dark text for readability */
+        margin: 0;
+        padding: 0;
+    }
+
+    a {
+        color: #007bff; /* Bootstrap primary color */
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline; /* Underline on hover for better visibility */
+    }
+
+    /* Navbar Styles */
+    .navbar {
+        background-color: #ffffff; /* White background for navbar */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    }
+
+    .nav-link {
+        padding: 0.5rem 1rem; /* Increased padding for better clickability */
+    }
+
+    .nav-link:hover {
+        background-color: #f8f9fa; /* Light background on hover */
+    }
+
+    /* Sidebar Styles */
+    .main-sidebar {
+        background-color: #343a40; /* Dark sidebar */
+        color: #ffffff; /* White text in sidebar */
+    }
+
+    .sidebar .nav-link {
+        color: #ffffff; /* White text for links */
+    }
+
+    .sidebar .nav-link:hover {
+        background-color: #495057; /* Darker background on hover */
+    }
+
+    /* Button Styles */
+    .btn {
+        padding: 0.5rem 1rem; /* Consistent padding */
+        border-radius: 0.25rem; /* Rounded corners */
+        transition: background-color 0.3s; /* Smooth transition */
+    }
+
+    .btn-primary {
+        background-color: #007bff; /* Primary button color */
+        color: #ffffff; /* White text */
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+    }
+
+    /* Card Styles */
+    .card {
+        border: none; /* Remove default border */
+        border-radius: 0.5rem; /* Rounded corners */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    }
+
+    .card-header {
+        background-color: #f8f9fa; /* Light background for card header */
+        border-bottom: 1px solid #dee2e6; /* Border for separation */
+    }
+
+    .card-body {
+        padding: 1.5rem; /* Increased padding for better spacing */
+    }
+
+    /* Breadcrumb Styles */
+    .breadcrumb {
+        background-color: transparent; /* Transparent background */
+        padding: 0; /* Remove padding */
+    }
+
+    .breadcrumb-item + .breadcrumb-item::before {
+        content: '>'; /* Custom separator */
+    }
+
+    /* Form Styles */
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    select,
+    textarea {
+        width: 100%; /* Full width for inputs */
+        padding: 0.5rem; /* Consistent padding */
+        border: 1px solid #ced4da; /* Light border */
+        border-radius: 0.25rem; /* Rounded corners */
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="password"]:focus,
+    select:focus,
+    textarea:focus {
+        border-color: #007bff; /* Blue border on focus */
+        outline: none; /* Remove default outline */
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+        .sidebar {
+            position: relative; /* Allow sidebar to be responsive */
+            width: 100%; /* Full width on small screens */
+        }
+
+        .navbar {
+            flex-direction: column; /* Stack navbar items */
+        }
+
+        .content-wrapper {
+            padding: 1rem; /* Add padding for small screens */
+        }
+    }
+  </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
   <div class="wrapper">
