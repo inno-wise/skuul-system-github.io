@@ -81,9 +81,7 @@
           <img class="w-32 h-32 transform transition-transform duration-500 hover:scale-110" src="{% static 'dist/img/login.png' %}" alt="Login Image">
         </div>
         <!-- Add content here -->
-      </div>
-    </div>
-  </div>
+     
         <!-- Login Form -->
         <form method="post" action="{% url 'login' %}" class="space-y-6">
           {% csrf_token %}
@@ -136,6 +134,10 @@
           <input type="hidden" name="next" value="{{ next }}">
         </form>
       </div>
+    </div>
+  </div>
+
+ </div>
     </div>
   </div>
 
