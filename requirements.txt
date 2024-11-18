@@ -25,5 +25,5 @@ dj-database-url
 whitenoise
 redis
 django-cors-headers
-widget-tweaks
+django-widget-tweaks
 psycopg2-binary  # For PostgreSQL
