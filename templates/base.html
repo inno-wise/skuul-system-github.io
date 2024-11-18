@@ -30,78 +30,67 @@
         padding: 0;
     }
 
-    a {
-        color: #007bff; /* Bootstrap primary color */
-        text-decoration: none;
-    }
-
-    a:hover {
-        text-decoration: underline; /* Underline on hover for better visibility */
-    }
-
     /* Navbar Styles */
-    .navbar {
-        background-color: #ffffff; /* White background for navbar */
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    .main-header {
+        background-color: #ffffff; /* White background */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+        padding: 0.5rem 1rem; /* Padding for navbar */
     }
 
-    .nav-link {
-        padding: 0.5rem 1rem; /* Increased padding for better clickability */
+    .navbar-nav .nav-link {
+        color: #343a40; /* Dark text for links */
+        padding: 0.5rem 1rem; /* Padding for links */
+        transition: background-color 0.3s; /* Transition for hover effect */
     }
 
-    .nav-link:hover {
+    .navbar-nav .nav-link:hover {
         background-color: #f8f9fa; /* Light background on hover */
+        border-radius: 0.25rem; /* Rounded corners on hover */
     }
 
     /* Sidebar Styles */
     .main-sidebar {
-        background-color: #343a40; /* Dark sidebar */
-        color: #ffffff; /* White text in sidebar */
+        background-color: #343a40; /* Dark background */
+        color: #ffffff; /* White text */
+        height: 100vh; /* Full height */
+        position: fixed; /* Fixed positioning */
+        top: 0; /* Align to top */
+        left: 0; /* Align to left */
+        width: 250px; /* Fixed width */
+        padding-top: 1rem; /* Padding for top */
     }
 
     .sidebar .nav-link {
         color: #ffffff; /* White text for links */
+        padding: 0.75rem 1rem; /* Padding for links */
+        transition: background-color 0.3s; /* Transition for hover effect */
     }
 
     .sidebar .nav-link:hover {
         background-color: #495057; /* Darker background on hover */
+        border-radius: 0.25rem; /* Rounded corners on hover */
     }
 
-    /* Button Styles */
-    .btn {
-        padding: 0.5rem 1rem; /* Consistent padding */
-        border-radius: 0.25rem; /* Rounded corners */
-        transition: background-color 0.3s; /* Smooth transition */
+    .sidebar .nav-header {
+        color: #ced4da; /* Light gray for headers */
+        font-size: 1.1rem; /* Slightly larger font size */
+        padding: 0.5rem 1rem; /* Padding for headers */
     }
 
-    .btn-primary {
-        background-color: #007bff; /* Primary button color */
-        color: #ffffff; /* White text */
+    /* Main Content Styles */
+    .content-wrapper {
+        margin-left: 250px; /* Space for sidebar */
+        padding: 1rem; /* Padding for content */
     }
 
-    .btn-primary:hover {
-        background-color: #0056b3; /* Darker blue on hover */
+    .content-header {
+        background-color: #ffffff; /* White background for header */
+        padding: 1rem; /* Padding for header */
+        border-bottom: 1px solid #dee2e6; /* Bottom border for separation */
     }
 
-    /* Card Styles */
-    .card {
-        border: none; /* Remove default border */
-        border-radius: 0.5rem; /* Rounded corners */
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    }
-
-    .card-header {
-        background-color: #f8f9fa; /* Light background for card header */
-        border-bottom: 1px solid #dee2e6; /* Border for separation */
-    }
-
-    .card-body {
-        padding: 1.5rem; /* Increased padding for better spacing */
-    }
-
-    /* Breadcrumb Styles */
     .breadcrumb {
-        background-color: transparent; /* Transparent background */
+        background-color: transparent; /* Transparent background for breadcrumb */
         padding: 0; /* Remove padding */
     }
 
@@ -109,40 +98,29 @@
         content: '>'; /* Custom separator */
     }
 
-    /* Form Styles */
-    input[type="text"],
-    input[type="email"],
-    input[type="password"],
-    select,
-    textarea {
-        width: 100%; /* Full width for inputs */
-        padding: 0.5rem; /* Consistent padding */
-        border: 1px solid #ced4da; /* Light border */
-        border-radius: 0.25rem; /* Rounded corners */
-    }
-
-    input[type="text"]:focus,
-    input[type="email"]:focus,
-    input[type="password"]:focus,
-    select:focus,
-    textarea:focus {
-        border-color: #007bff; /* Blue border on focus */
-        outline: none; /* Remove default outline */
+    /* Card Styles */
+    .card {
+        border: none; /* Remove default border */
+        border-radius: 0.5rem; /* Rounded corners */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        margin-bottom: 1rem; /* Margin for spacing */
     }
 
     /* Responsive Adjustments */
     @media (max-width: 768px) {
-        .sidebar {
+        .main-sidebar {
             position: relative; /* Allow sidebar to be responsive */
             width: 100%; /* Full width on small screens */
-        }
-
-        .navbar {
-            flex-direction: column; /* Stack navbar items */
+            height: auto; /* Auto height */
         }
 
         .content-wrapper {
+            margin-left: 0; /* No margin on small screens */
             padding: 1rem; /* Add padding for small screens */
+        }
+
+        .navbar-nav .nav-link {
+ padding: 0.5rem; /* Adjust padding for smaller screens */
         }
     }
   </style>
