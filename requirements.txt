@@ -19,7 +19,7 @@ tomli==1.0.4
 gunicorn
 psycopg2-binary
 Django==3.2.25  # or whichever version you're using
-Django==3.0.5
+#Django==3.0.5
 python-dotenv
 dj-database-url
 whitenoise
