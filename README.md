@@ -19,7 +19,7 @@ password: admin123
 ## Usage
 Install in a Virtual Environment. Once you have set up a VE, clone this project
 ```bash
-git clone https://github.com/adigunsherif/Django-School-Management-System.git
+git clone https://github.com/inno-wise/skuul-system-github.io.git
 ```
 Then
 
