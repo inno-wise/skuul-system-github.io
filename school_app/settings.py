@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+import dj_database_url
+
 
 # Ensure BASE_DIR is defined correctly
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -79,13 +82,28 @@ TEMPLATES = [
 WSGI_APPLICATION = "school_app.wsgi.application"
 
 # Database settings
+#DATABASES = {
+#    "default": {
+#        "ENGINE": "django.db.backends.sqlite3",
+#        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+#    }
+#}
+# Default SQLite for development
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-    }
+    'default': dj_database_url.config(
+        default=f'sqlite:///{BASE_DIR}/db.sqlite3',
+        conn_max_age=600,
+        ssl_require=not DEBUG
+    )
 }
 
+# Optional: PostgreSQL configuration for production
+if not DEBUG:
+    DATABASES['default'] = dj_database_url.config(
+        default=os.getenv('DATABASE_URL'),
+        conn_max_age=600,
+        ssl_require=True
+    )
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -102,6 +120,22 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Caching settings
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake',
+    }
+}
+
+# Optional: Redis caching for production
+if not DEBUG:
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+            'LOCATION': os.getenv('REDIS_URL', 'redis://localhost:6379'),
+        }
+    }
 # Internationalization settings
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = "UTC"
@@ -139,36 +173,60 @@ LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 
 # Logging configuration
+#LOGGING = {
+#    "version": 1,
+#    "disable_existing_loggers": False,
+#    "formatters": {
+#        "verbose": {
+#            "format": "{levelname} {asctime} {message}",
+#            "style": "{",
+#        },
+#    },
+#    "handlers": {
+#        "file": {
+#            "level": "INFO",
+#            "class": "logging.handlers.TimedRotatingFileHandler",
+#            "when": "W6",
+#            "interval": 4,
+#            "backupCount": 3,
+#            "encoding": "utf8",
+#            "filename": os.path.join(BASE_DIR, "debug.log"),
+#            "formatter": "verbose",
+#        },
+#    },
+#    "loggers": {
+#        "django": {
+#            "handlers": ["file"],
+#            "level": "INFO",
+#            "propagate": True,
+#        },
+#    },
+#}
 LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    "formatters": {
-        "verbose": {
-            "format": "{levelname} {asctime} {message}",
-            "style": "{",
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+        'file': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'filename': BASE_DIR / 'error.log',
         },
     },
-    "handlers": {
-        "file": {
-            "level": "INFO",
-            "class": "logging.handlers.TimedRotatingFileHandler",
-            "when": "W6",
-            "interval": 4,
-            "backupCount": 3,
-            "encoding": "utf8",
-            "filename": os.path.join(BASE_DIR, "debug.log"),
-            "formatter": "verbose",
+    'loggers': {
+        'django': {
+            'handlers': ['console', 'file'],
+            'level': 'INFO',
         },
-    },
-    "loggers": {
-        "django": {
-            "handlers": ["file"],
-            "level": "INFO",
-            "propagate": True,
+        'apps': {
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG',
+            'propagate': True,
         },
     },
 }
-
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
 # Site Default values
