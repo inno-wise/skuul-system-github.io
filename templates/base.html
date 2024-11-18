@@ -7,23 +7,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
+  <!-- Linking CSS files from the static directory -->
+  <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
+  <link rel="stylesheet" href="{% static 'dist/css/login-page.css' %}">
+
   <title>{{ school_name | default:"MySchool" }}</title>
-<link rel="icon" type="image/x-icon" href="https://inno-wise.github.io/mydiary/img/mot.png">
+  <link rel="icon" type="image/x-icon" href="https://inno-wise.github.io/mydiary/img/mot.png">
+
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
+
+  <!-- Toastr for notifications -->
   <link rel="stylesheet" href="{% static 'plugins/toastr/toastr.min.css' %}">
+
   <!-- overlayScrollbars -->
-  <link rel="stylesheet"
-    href="{% static 'plugins/overlayScrollbars/css/OverlayScrollbars.min.css' %}">
-  <link rel="stylesheet" href="{% static 'plugins/Datatables/datatables.min.css' %}" />
+  <link rel="stylesheet" href="{% static 'plugins/overlayScrollbars/css/OverlayScrollbars.min.css' %}">
+
+  <!-- Datatables CSS -->
+  <link rel="stylesheet" href="{% static 'plugins/Datatables/datatables.min.css' %}">
+
   <!-- Theme style -->
   <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
-  <!-- Google Font: Source Sans Pro -->
-  <link
-    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"
-    rel="stylesheet">
-</head>
 
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+<body>
+  <!-- Your page content here -->
+</body>
+</html>
 <body
   class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
   <div class="wrapper">
