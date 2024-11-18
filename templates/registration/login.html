@@ -1,6 +1,8 @@
 {% load static %}
 {% load widget_tweaks %}
 
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +12,7 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
   <title>{{ school_name | default:"Innocenty" }}</title>
-<link rel="icon" type="image/x-icon" href="https://inno-wise.github.io/mydiary/img/mot.png">
+  <link rel="icon" type="image/x-icon" href="https://inno-wise.github.io/mydiary/img/mot.png">
 
   <!-- Tailwind CSS (CDN) -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -30,7 +32,7 @@
   <style>
     /* Parallax Effect */
     .parallax {
-      background-image: url('{% static "https://media.istockphoto.com/id/1216453954/photo/empty-classroom.webp?a=1&b=1&s=612x612&w=0&k=20&c=jglJbItPjYEp6oPxFLGUtXH7oljOTywhow3ERBjTyHE=" %}');
+      background-image: url('{% static "images/empty-classroom.webp" %}');
       height: 100vh;
       background-attachment: fixed;
       background-size: cover;
@@ -75,9 +77,13 @@
       <div class="max-w-md w-full bg-white p-8 rounded-xl shadow-lg transform transition-all duration-500 hover:scale-105 hover:shadow-2xl">
         
         <div class="flex justify-center mb-8">
-          <img class="w-32 h-32 transform transition-transform duration-500 hover:scale-110" src="{% static 'https://media.istockphoto.com/id/1455562255/photo/encryption-your-data-unique-digital-lock-big-data-security-safe-your-data-cyber-internet.webp?a=1&b=1&s=612x612&w=0&k=20&c=1f3jajahQGYAQPPc2l_cRytwzcPh1-vB9KYfTLrq098=' %}" alt="Login Image">
+          <!-- Updated Image Path for login.png -->
+          <img class="w-32 h-32 transform transition-transform duration-500 hover:scale-110" src="{% static 'dist/img/login.png' %}" alt="Login Image">
         </div>
-
+        <!-- Add content here -->
+      </div>
+    </div>
+  </div>
         <!-- Login Form -->
         <form method="post" action="{% url 'login' %}" class="space-y-6">
           {% csrf_token %}
