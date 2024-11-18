@@ -11,11 +11,10 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from pathlib import Path
 
-
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+# Ensure BASE_DIR is defined correctly
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -24,13 +23,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG", "FALSE").lower() == True
+DEBUG = os.environ.get("DEBUG", "FALSE").lower() == "true"
 
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOST").split(" ")
-
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOST", "").split(" ")
 
 # Application definition
-
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -81,10 +78,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "school_app.wsgi.application"
 
-
-# Database
-# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
+# Database settings
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
@@ -92,13 +86,7 @@ DATABASES = {
     }
 }
 
-
-#database_url = os.environ.get("DATABASE_URL")
-#DATABASES["default"] = dj_database_url.parse(database_url)
-
 # Password validation
-# https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
@@ -114,48 +102,43 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-# Internationalization
-# https://docs.djangoproject.com/en/3.0/topics/i18n/
-
+# Internationalization settings
 LANGUAGE_CODE = "en-us"
-
 TIME_ZONE = "UTC"
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.0/howto/static-files/
-
-DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240
-
 STATIC_URL = "/static/"
 
-STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
+# Collecting static files into one directory
+STATICFILES_DIRS = [
+    BASE_DIR / "dist",  # Custom static files (dist directory)
+    BASE_DIR / "plugins",  # External static files (plugins directory)
+    BASE_DIR / "static",  # Your base static directory (if needed)
+]
 
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+# Directory for collected static files
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-
+# Media files settings
 MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
 
+# Maximum number of fields allowed for file uploads
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240
+
+# Session settings
+SESSION_SAVE_EVERY_REQUEST = True
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_COOKIE_AGE = 10800  # 3 hours
+
+# Redirection URLs after login/logout
 LOGIN_REDIRECT_URL = "/"
-
 LOGOUT_REDIRECT_URL = "/"
 
-
-SESSION_SAVE_EVERY_REQUEST = True
-
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-
-SESSION_COOKIE_AGE = 10800
-
-
+# Logging configuration
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
