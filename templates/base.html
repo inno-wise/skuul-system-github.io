@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="{% static 'plugins/overlayScrollbars/css/OverlayScrollbars.min.css' %}">
   <link rel="stylesheet" href="{% static 'plugins/Datatables/datatables.min.css' %}">
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-  <style>
+<style>
     /* General Styles */
     body {
         font-family: 'Source Sans Pro', sans-serif;
@@ -81,6 +81,7 @@
     .content-wrapper {
         margin-left: 250px; /* Space for sidebar */
         padding: 1rem; /* Padding for content */
+        transition: margin-left 0.3s; /* Smooth transition for sidebar toggle */
     }
 
     .content-header {
@@ -120,10 +121,10 @@
         }
 
         .navbar-nav .nav-link {
- padding: 0.5rem; /* Adjust padding for smaller screens */
+            padding: 0.5rem; /* Adjust padding for smaller screens */
         }
     }
-  </style>
+</style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
   <div class="wrapper">
