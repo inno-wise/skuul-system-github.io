@@ -15,7 +15,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 import dj_database_url
 
-
+load_dotenv()
 # Ensure BASE_DIR is defined correctly
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -172,6 +172,68 @@ SESSION_COOKIE_AGE = 10800  # 3 hours
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 
+# Performance settings
+CONN_MAX_AGE = 60  # Database connection persistence
+USE_ETAGS = True  # Enable ETags for caching
+
+# Disable some unnecessary middleware in production
+if not DEBUG:
+    MIDDLEWARE = [mw for mw in MIDDLEWARE if mw != 'django.middleware.csrf.CsrfViewMiddleware']
+
+# Additional static file configuration
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+]
+
+# File upload settings
+FILE_UPLOAD_HANDLERS = [
+    'django.core.files.uploadhandler.MemoryFileUploadHandler',
+    'django.core.files.uploadhandler.TemporaryFileUploadHandler',
+]
+FILE_UPLOAD_MAX_MEMORY_SIZE = 2621440  # 2.5 MB
+
+# Authentication backends
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    # Optional: Add social auth or custom backends
+]
+
+# Password Hashers
+PASSWORD_HASHERS = [
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+]
+
+# Production-specific settings
+if not DEBUG:
+    # Additional security settings
+    CSRF_COOKIE_HTTPONLY = True
+    SESSION_COOKIE_HTTPONLY = True
+    SECURE_HSTS_SECONDS = 31536000  # 1 year
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+
+# Security Middleware
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+X_FRAME_OPTIONS = 'DENY'
+
+# HTTPS Settings (for production)
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+
+# CORS and CSP Settings
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8000",
+    "https://skuul-jhuc.onrender.com",
+]
+
+# Optional: Add Whitenoise for static file serving
+MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Logging configuration
 #LOGGING = {
 #    "version": 1,
