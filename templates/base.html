@@ -35,11 +35,21 @@
         background-color: #ffffff; /* White background */
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow for depth */
         padding: 0.5rem 1rem; /* Padding for navbar */
+        position: relative; /* Ensure it stays on top */
+        z-index: 1000; /* High z-index to stay above other elements */
+    }
+
+    .navbar-nav {
+        list-style: none; /* Remove default list styles */
+        padding: 0;
+        margin: 0;
+        display: flex; /* Flexbox for navbar items */
     }
 
     .navbar-nav .nav-link {
         color: #343a40; /* Dark text for links */
         padding: 0.5rem 1rem; /* Padding for links */
+        text-decoration: none; /* Remove underline */
         transition: background-color 0.3s; /* Transition for hover effect */
     }
 
@@ -60,9 +70,21 @@
         padding-top: 1rem; /* Padding for top */
     }
 
+    .sidebar {
+        padding: 0; /* Remove padding */
+    }
+
+    .sidebar .nav {
+        list-style: none; /* Remove default list styles */
+        padding: 0; /* Remove padding */
+        margin: 0; /* Remove margin */
+    }
+
     .sidebar .nav-link {
         color: #ffffff; /* White text for links */
         padding: 0.75rem 1rem; /* Padding for links */
+        text-decoration: none; /* Remove underline */
+        display: block; /* Block display for full width */
         transition: background-color 0.3s; /* Transition for hover effect */
     }
 
@@ -111,13 +133,17 @@
     @media (max-width: 768px) {
         .main-sidebar {
             position: relative; /* Allow sidebar to be responsive */
-            width: 100%; /* Full width on small screens */
+                        width: 100%; /* Full width on small screens */
             height: auto; /* Auto height */
         }
 
         .content-wrapper {
             margin-left: 0; /* No margin on small screens */
             padding: 1rem; /* Add padding for small screens */
+        }
+
+        .navbar-nav {
+            flex-direction: column; /* Stack navbar items vertically */
         }
 
         .navbar-nav .nav-link {
