@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "apps.staffs",
     "apps.finance",
     "apps.result",
+     "corsheaders",
 ]
 
 MIDDLEWARE = [
@@ -56,6 +57,9 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "apps.corecode.middleware.SiteWideConfigs",
+   "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.cache.FetchFromCacheMiddleware",
+"django.middleware.cache.UpdateCacheMiddleware",
 ]
 
 ROOT_URLCONF = "school_app.urls"
@@ -88,6 +92,7 @@ WSGI_APPLICATION = "school_app.wsgi.application"
 #        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
 #    }
 #}
+
 # Default SQLite for development
 DATABASES = {
     'default': dj_database_url.config(
@@ -104,6 +109,14 @@ if not DEBUG:
         conn_max_age=600,
         ssl_require=True
     )
+
+# Database connection pooling
+DATABASES['default']['CONN_MAX_AGE'] = 600  # 10 minutes
+
+# Disable some Django features in production
+if not DEBUG:
+    TEMPLATES[0]['OPTIONS']['debug'] = False
+    
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -120,22 +133,24 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Optional: Redis caching for production
+if not DEBUG:
 # Caching settings
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
         'LOCATION': 'unique-snowflake',
+    },
+    'redis': {
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+        'LOCATION': os.getenv('REDIS_URL', 'redis://localhost:6379'),
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        }
     }
 }
 
-# Optional: Redis caching for production
-if not DEBUG:
-    CACHES = {
-        'default': {
-            'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-            'LOCATION': os.getenv('REDIS_URL', 'redis://localhost:6379'),
-        }
-    }
+
 # Internationalization settings
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = "UTC"
@@ -225,10 +240,19 @@ if not DEBUG:
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
 
-# CORS and CSP Settings
+# CORS Settings
+CORS_ALLOW_ALL_ORIGINS = DEBUG  # Only in development
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8000",
     "https://skuul-jhuc.onrender.com",
+]
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
 ]
 
 # Optional: Add Whitenoise for static file serving
@@ -264,23 +288,38 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 #        },
 #    },
 #}
+# More detailed logging
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
     'handlers': {
         'console': {
+            'level': 'INFO',
             'class': 'logging.StreamHandler',
+            'formatter': 'simple'
         },
         'file': {
             'level': 'ERROR',
             'class': 'logging.FileHandler',
             'filename': BASE_DIR / 'error.log',
+            'formatter': 'verbose'
         },
     },
     'loggers': {
         'django': {
             'handlers': ['console', 'file'],
             'level': 'INFO',
+            'propagate': True,
         },
         'apps': {
             'handlers': ['console', 'file'],
@@ -292,3 +331,22 @@ LOGGING = {
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
 # Site Default values
+# Ensure these are set for production
+if not DEBUG:
+    # Additional security settings
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SECURE_SSL_REDIRECT = True
+    
+    # Disable admin access in production (optional)
+    # ADMIN_ENABLED = False
+# Custom user model (optional)
+# AUTH_USER_MODEL = 'yourapp.CustomUser'
+
+# Email configuration (optional)
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#EMAIL_HOST = os.getenv('EMAIL_HOST', 'localhost')
+#EMAIL_PORT = os.getenv('EMAIL_PORT', 587)
+##EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', 'True') == 'True'
+#EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', '')
+#EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', '')
+
