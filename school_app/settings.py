@@ -350,3 +350,24 @@ if not DEBUG:
 #EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', '')
 #EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', '')
 
+# Add to your settings.py
+
+# CSRF and Security Settings
+CSRF_USE_SESSIONS = True
+CSRF_COOKIE_HTTPONLY = True
+CSRF_COOKIE_SAMESITE = 'Strict'
+
+# Session Security
+SESSION_COOKIE_SAMESITE = 'Strict'
+SESSION_COOKIE_HTTPONLY = True
+
+# Additional Security Middleware
+if not DEBUG:
+    MIDDLEWARE += [
+        'django.middleware.security.SecurityMiddleware',
+    ]
+
+    # Strict Transport Security
+    SECURE_HSTS_PRELOAD = True
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_SECONDS = 31536000  # 1 year
