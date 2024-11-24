@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nut50 - Vehicle Mechanics</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+  /* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Georgia", serif;
+  background: #f8f0e3;
+  color: #4d3623;
+  overflow-x: hidden;
+}
+
+/* Title Styling */
+.title {
+  font-size: 3rem;
+  text-align: center;
+  margin: 1rem 0;
+  color: #8b5e3c;
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: transform 0.5s ease;
+  cursor: pointer;
+}
+.title:hover {
+  transform: scale(1.1) rotate(-5deg);
+  color: #4d3623;
+}
+.title span {
+  color: #4d3623;
+}
+
+/* Header Styling */
+.header {
+  background: #8b5e3c;
+  padding: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+/* Navigation Styling */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu-toggle {
+  display: none;
+  font-size: 1.5rem;
+  color: #f8f0e3;
+  cursor: pointer;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-weight: bold;
+  color: #f8f0e3;
+  text-transform: uppercase;
+  padding: 0.5rem;
+  transition: background 0.3s, transform 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-links a:hover {
+  background: #4d3623;
+  border-radius: 5px;
+  transform: scale(1.1);
+}
+
+.nav-links a i {
+  font-size: 1.2rem;
+}
+
+/* Blog Feed Styling */
+.blog-feed {
+  padding: 2rem;
+  text-align: center;
+}
+.blog-feed h2 {
+  color: #8b5e3c;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.blogs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.blog {
+  background: white;
+  border: 2px solid #8b5e3c;
+  border-radius: 10px;
+  padding: 1rem;
+  width: 300px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, background 0.3s;
+}
+.blog:hover {
+  transform: scale(1.05);
+  background: #8b5e3c;
+  color: white;
+}
+
+/* Footer Styling */
+.footer {
+  text-align: center;
+  padding: 1rem;
+  background: #8b5e3c;
+  color: #f8f0e3;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+/* Hover Particles */
+.particle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #8b5e3c;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: fadeOut 1s forwards;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: scale(2);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    gap: 1rem;
+    display: none;
+    background: #8b5e3c;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    padding: 1rem 0;
+    z-index: 10;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .blog {
+    width: 90%;
+  }
+}
+  </style>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="header">
+    <h1 class="title">Nut<span>50</span></h1>
+    <nav class="nav">
+      <div class="menu-toggle" id="menu-toggle">
+        <i class="fas fa-bars"></i>
+      </div>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="#"><i class="fas fa-info-circle"></i> About</a></li>
+        <li><a href="#"><i class="fas fa-tools"></i> Services</a></li>
+        <li><a href="#"><i class="fas fa-blog"></i> Blog</a></li>
+        <li><a href="#"><i class="fas fa-envelope"></i> Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="blog-feed">
+      <h2><i class="fas fa-newspaper"></i> Latest Blogs</h2>
+      <div id="blog-container" class="blogs"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p><i class="fas fa-copyright"></i> 2024 Nut50. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+  // Dynamic Blog Feed
+const blogs = [
+  {
+    title: "How to Maintain Your Engine",
+    content: "Learn the basics of keeping your engine in top condition for a smooth ride."
+  },
+  {
+    title: "Top 5 Tools for Mechanics",
+    content: "Equip your garage with the essential tools every mechanic needs."
+  },
+  {
+    title: "Understanding Vehicle Diagnostics",
+    content: "Dive into the modern tech behind vehicle diagnostic systems."
+  },
+  {
+    title: "Common Brake Problems",
+    content: "Identify and resolve frequent issues with your car's braking system."
+  },
+  {
+    title: "The Future of Electric Vehicles",
+    content: "Explore the emerging trends in the EV industry."
+  }
+];
+
+function loadBlogs() {
+  const blogContainer = document.getElementById("blog-container");
+  blogs.forEach(blog => {
+    const blogCard = document.createElement("div");
+    blogCard.className = "blog";
+    blogCard.innerHTML = `<h3>${blog.title}</h3><p>${blog.content}</p>`;
+    blogContainer.appendChild(blogCard);
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  loadBlogs();
+  addHoverParticles();
+
+  // Toggle mobile menu
+  const menuToggle = document.getElementById("menu-toggle");
+  const navLinks = document.getElementById("nav-links");
+  menuToggle.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
+  });
+});
+
+// Hover Particles Effect
+function addHoverParticles() {
+  document.addEventListener("mousemove", e => {
+    const particle = document.createElement("div");
+    particle.className = "particle";
+    document.body.appendChild(particle);
+
+    particle.style.left = `${e.pageX}px`;
+    particle.style.top = `${e.pageY}px`;
+
+    setTimeout(() => {
+      particle.remove();
+    }, 1000);
+  });
+}
+  </script>
+</body>
+</html>
